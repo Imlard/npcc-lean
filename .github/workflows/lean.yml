@@ -29,5 +29,6 @@ jobs:
         working-directory: lean
         shell: pwsh
         run: |
-          lake env lean AxiomReport.lean
-          lake env lean wrapper_check.lean
+          $lake = Join-Path $env:USERPROFILE ".elan\bin\lake.exe"
+          & $lake env lean AxiomReport.lean
+          & $lake env lean wrapper_check.lean
