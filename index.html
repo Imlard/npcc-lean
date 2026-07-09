@@ -211,20 +211,18 @@
   .thl.sel{box-shadow:0 0 0 2.5px var(--accent),0 0 22px rgba(167,139,250,.45)}
   @keyframes hlpulse{0%,100%{box-shadow:0 0 0 2px var(--accent)}50%{box-shadow:0 0 0 6px var(--accent),0 0 28px rgba(167,139,250,.7)}}
   .thl.pulse{animation:hlpulse 1s ease 2}
-  .tdetail{width:clamp(440px,31vw,620px);min-width:390px;max-width:68vw;flex-shrink:0;background:var(--panel);display:flex;flex-direction:column;min-height:0}
+  .tdetail{width:min(365px,27vw);min-width:280px;max-width:60vw;flex-shrink:0;background:var(--panel);display:flex;flex-direction:column;min-height:0}
   .tdetail-empty{margin:auto;padding:28px;text-align:center;color:var(--muted);font-size:13px;line-height:1.65;max-width:295px}
   .tdetail-empty .big{font-family:var(--mono);color:var(--faint);font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px}
   .tdetail-on{display:none;flex-direction:column;min-height:0;height:100%}
   .tdetail-on.on{display:flex}
   .td-head{padding:15px 17px 12px;border-bottom:1px solid var(--line)}
   .td-head h3{margin:7px 0 0;font-size:15px;font-weight:650;text-wrap:balance}
-  .td-scroll{flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto}
-  .td-scroll > .summary, .td-scroll > .prov{flex:0 1 auto;overflow-y:auto}
-  .td-scroll > .summary{order:2;max-height:22vh;border-top:1px solid var(--line)}
-  .td-scroll > .prov{order:3;max-height:18vh}
-  .td-scroll > .sec{order:1;flex:0 0 auto;height:clamp(320px,48vh,620px);display:flex;flex-direction:column;padding-bottom:12px}
-  .td-scroll > .sec > pre.code{flex:1 1 auto;min-height:0;max-height:none;font-size:12px}
-  .td-scroll > .td-graph{order:4;flex:0 0 auto;margin-bottom:14px}
+  .td-scroll{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+  .td-scroll > .summary, .td-scroll > .prov{flex:0 0 auto}
+  .td-scroll > .sec{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;padding-bottom:12px}
+  .td-scroll > .sec > pre.code{flex:1 1 auto;min-height:0;max-height:none}
+  .td-scroll > .td-graph{flex:0 0 auto;margin-bottom:14px}
   .td-scroll .summary{border-bottom:1px solid var(--line)}
   .td-graph{margin:14px 17px 4px;width:calc(100% - 34px);font-family:var(--mono);font-size:12px;color:#fff;background:var(--panel2);
     border:1px solid var(--accent);border-radius:7px;padding:10px;cursor:pointer}
@@ -905,7 +903,7 @@
     });
   }
   makeResizer("res-insp", document.getElementById("aside"), 300, .72, "right");
-  makeResizer("res-tdetail", document.getElementById("tdetail"), 390, .68, "right");
+  makeResizer("res-tdetail", document.getElementById("tdetail"), 280, .60, "right");
   makeResizer("res-pidx", document.querySelector(".pidx"), 180, .45, "left");
   // Resize the whole tracer sheet from its left edge; re-fit the pages to the new
   // width on release. Highlight boxes ride the page cards' aspect-ratio, so this
