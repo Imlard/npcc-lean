@@ -12,7 +12,7 @@ the integer ceiling `⌈·⌉ : ℝ → ℤ` (its argument may be negative, when
 `port:rankclaim`: the artifact holds the generic engine
 (`logRank_lowerBound`, `distinctCols_card_le_two_pow_rank`,
 `protocol_rank_bound`) but not this bracket-form seed bound. -/
-theorem rankclaim {p : ℕ} (hp : 0 < p) {x y : ℝ}
+theorem rankclaim {p : ℕ} (_hp : 0 < p) {x y : ℝ}
     (hx0 : 0 < x) (hx1 : x ≤ 1) (hy0 : 0 < y) (hy1 : y ≤ 1)
     (hlog : 0 < (p : ℝ) + Real.logb 2 y) :
     (⌈Real.logb 2 ((p : ℝ) + Real.logb 2 y)⌉ + 1 : ℤ) ≤

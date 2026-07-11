@@ -1,0 +1,703 @@
+{
+  "schema": 1,
+  "audit": {
+    "date": "2026-07-11",
+    "baselineCommit": "76320b8010cc5daa255fda506554042ce4594c5f",
+    "auditedNodes": 137,
+    "auditedExplainers": 807,
+    "changedNodes": 36,
+    "changedExplainers": 114,
+    "fieldChanges": {
+      "line": 103,
+      "concept": 14,
+      "label": 1
+    },
+    "advancedWorktreeReview": "All 14 conceptual changes and the label change were checked against the current embedded Lean statements; the amplification wording was strengthened as recorded in its reviewNote."
+  },
+  "corrections": [
+    {
+      "node": "aux:equipartition-subset-Q",
+      "matchLabel": "theorem signature",
+      "anchor": "theorem IsEquipartitionedGE.mono_Q {ι X : Type*} [DecidableEq ι]",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:equipartition-subset-Q",
+      "matchLabel": "the objects involved",
+      "anchor": "{R : Finset (ι × X)} {Q Q2 : Finset ι} {T : ℕ}",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:equipartition-subset-Q",
+      "matchLabel": "hypotheses",
+      "anchor": "(h : IsEquipartitionedGE R Q T) (hsub : Q2 ⊆ Q) :",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:bracket-mono",
+      "matchLabel": "the theorem signature",
+      "anchor": "theorem bracketGE.anti_mono_params {X Y : Type*} [Fintype X] [Fintype Y]",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:bracket-mono",
+      "matchLabel": "the parameters",
+      "anchor": "(p : ℕ) {x y x2 y2 : ℝ} (hx : x2 ≤ x) (hy : y2 ≤ y) :",
+      "occurrence": 1,
+      "concept": "Assumes x2 <= x and y2 <= y and concludes bracketGE X Y p x y is a subset of bracketGE X Y p x2 y2. Lowering either density threshold weakens membership, so the bracket family can only grow.",
+      "reviewNote": "Wording reconciled with the advanced artifact while preserving the audited mathematical correction."
+    },
+    {
+      "node": "aux:bracket-nonempty",
+      "matchLabel": "the parameters",
+      "concept": "Takes p, x, and y with x <= 1 and y <= 1. Those bounds make the full row/column pair a valid bracket member; the separate hX hypothesis ensures the row type is nonempty.",
+      "reviewNote": "Wording reconciled with the advanced artifact while preserving the audited mathematical correction."
+    },
+    {
+      "node": "bridge:equipartition",
+      "matchLabel": "the conclusion: existence of S",
+      "concept": "Concludes there exists a set S of plain natural numbers, contained in the range [0, m*p) and obtained by flattening the chosen typed pairs into single indices, such that S is exactly equipartitioned: each consecutive length-m block of positions holds exactly T rows."
+    },
+    {
+      "node": "bridge:bracket",
+      "matchLabel": "extraction membership conclusion",
+      "anchor": "Workspace.Types.Extract.extract",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "theorem signature and types",
+      "anchor": "theorem coord_projection {X Y : Type*} [Fintype X] [Fintype Y]",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "size parameters and index bijection",
+      "anchor": "{p r : ℕ} (hr : 0 < r) {Q : Finset (Fin p)} (e : Fin r ≃ {q // q ∈ Q})",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "submatrix and threshold parameters",
+      "anchor": "{R : Finset (Fin p × X)} {C : Finset (Fin p → Y)} {T : ℕ} {x y : ℝ}",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "row equipartition hypothesis",
+      "anchor": "(hrow : IsEquipartitionedGE R Q T)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "column count hypothesis",
+      "anchor": "(hcol : ⌈((Fintype.card Y : ℝ) ^ p) * y⌉₊ ≤ C.card)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "row count vs threshold hypothesis",
+      "anchor": "(hxT : ⌈(Fintype.card X : ℝ) * x⌉₊ ≤ T) :",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "existential declaration of the extracted pair",
+      "anchor": "∃ RC' : Finset (Fin r × X) × Finset (Fin r → Y),",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "conclusion: RC' is a bracket member",
+      "anchor": "RC' ∈ bracketGE X Y r x y ∧",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:coord-projection",
+      "matchLabel": "rows come from R via e",
+      "anchor": "(∀ a ∈ RC'.1, ((e a.1).val, a.2) ∈ R) ∧",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:D-subgame-le",
+      "matchLabel": "theorem signature and types",
+      "anchor": "theorem D_subgame_le {A B : Type*} [Fintype A] [Fintype B]",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:D-subgame-le",
+      "matchLabel": "the function and restriction sets",
+      "anchor": "(f : A → B → Bool) (R : Finset A) (C : Finset B) :",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:DSet-le-Dfamily",
+      "matchLabel": "theorem signature and type params",
+      "anchor": "theorem DSet_le_Dfamily {X Y : Type*} [Fintype X] [Fintype Y]",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:DSet-le-Dfamily",
+      "matchLabel": "the two objects being compared",
+      "anchor": "(f : X → Y → Bool) (M : Workspace.Types.BoolMat.BoolMat)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:DSet-le-Dfamily",
+      "matchLabel": "identification of rows and columns",
+      "anchor": "(eX : Fin M.m ≃ X) (eY : Fin M.n ≃ Y)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:DSet-le-Dfamily",
+      "matchLabel": "matrix agrees with the game",
+      "anchor": "(he : ∀ i j, M.e i j = f (eX i) (eY j))",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:DSet-le-Dfamily",
+      "matchLabel": "numeric side parameters",
+      "anchor": "{p : ℕ} {x y : ℝ} (hx0 : 0 < x) (hx1 : x ≤ 1) (hy0 : 0 < y) (hy1 : y ≤ 1)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:DSet-le-Dfamily",
+      "matchLabel": "nonemptiness condition",
+      "anchor": "(hX : 1 ≤ Fintype.card X) :",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:DSet-le-Dfamily",
+      "matchLabel": "the inequality being proved",
+      "anchor": "DSet (bracket M p x y)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:odd-copy-seed-rungs",
+      "matchLabel": "theorem signature and types",
+      "anchor": "theorem odd_copy_seed_rungs {X Y : Type*} [Fintype X] [Fintype Y]",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:odd-copy-seed-rungs",
+      "matchLabel": "the matrix and its parameters",
+      "anchor": "{f : X → Y → Bool} {δ b : ℝ}",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:odd-copy-seed-rungs",
+      "matchLabel": "robustness hypothesis and side conditions",
+      "anchor": "(h : IsRobust f δ b) (hb : 1 ≤ b) (hδ0 : 0 < δ) (hδ : δ ≤ 1 / 2)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:odd-copy-seed-rungs",
+      "matchLabel": "complexity and ladder-rung hypotheses",
+      "anchor": "(hD : 2 ≤ D f) (ℓ : ℕ) (hℓ2 : 2 ≤ ℓ) (hℓb : (ℓ : ℝ) ≤ b) :",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:odd-copy-seed-rungs",
+      "matchLabel": "the conclusion bound",
+      "anchor": "D f + ℓ ≤ LambdaGE f (2 ^ (ℓ - 1) + 1) ((2 : ℝ) ^ ((ℓ : ℝ) - b))",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:new-partition",
+      "matchLabel": "scalar conclusion",
+      "concept": "Concludes k + LambdaGE f p x y <= LambdaGE f (gridFloor rho k s p) (2^k * x) (y^(rho^s)). Thus k iterations add k to this communication-complexity lower bound while scaling the row density by 2^k; LambdaGE is not a density measure.",
+      "reviewNote": "Wording reconciled with the advanced artifact while preserving the audited mathematical correction."
+    },
+    {
+      "node": "cor:iterated-partition-seed",
+      "matchLabel": "setup: types and the function",
+      "concept": "Declares finite types X and Y and a Boolean-valued function f, together with rho, k, s, and p under the hypotheses 2 < rho, s <= k, and 1 <= p.",
+      "reviewNote": "Wording reconciled with the advanced artifact while preserving the audited mathematical correction."
+    },
+    {
+      "node": "cor:power-of-two",
+      "matchLabel": "robustness and range hypotheses",
+      "concept": "Assumes f is (delta,b)-robust with b >= 1 and 0 < delta <= 1/2. The endpoint delta = 1/2 is allowed; the theorem does not require delta < 1/2.",
+      "reviewNote": "Wording reconciled with the advanced artifact while preserving the audited mathematical correction."
+    },
+    {
+      "node": "lem:no-waste-near-separation",
+      "matchLabel": "theorem signature",
+      "anchor": "theorem no_waste_row_partition {ι X : Type*} [DecidableEq ι]",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:no-waste-near-separation",
+      "matchLabel": "the basic objects",
+      "anchor": "(Q : Finset ι) (Rin : Finset (ι × X)) (T₀ T L : ℕ) (hL : L ≤ Q.card)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:no-waste-near-separation",
+      "matchLabel": "the labeling function",
+      "anchor": "(lab : ι × X → Fin L)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:no-waste-near-separation",
+      "matchLabel": "equipartition hypothesis",
+      "anchor": "(hEq : IsEquipartitionedGE Rin Q T₀)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:no-waste-near-separation",
+      "matchLabel": "the count threshold",
+      "anchor": "(hT : Q.card * T < T₀)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:no-waste-near-separation",
+      "matchLabel": "no shared heavy part",
+      "anchor": "(hNoTwo : ∀ j : Fin L, ¬ ∃ i₁ ∈ Q, ∃ i₂ ∈ Q, i₁ ≠ i₂ ∧",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "theorem signature and types",
+      "anchor": "theorem failure_to_separate_gives_gap {X Y : Type*} [Fintype X] [Fintype Y]",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "robustness and gap parameters",
+      "anchor": "(h : IsRobust f δ b) (hb : 1 ≤ b) (hδ0 : 0 < δ) (hδ : δ ≤ 1 / 2)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "bracket count and target range",
+      "anchor": "(hD : 2 ≤ D f) (q : ℕ) (hq : 1 ≤ q) {x y : ℝ}",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "the bracket member RC",
+      "anchor": "(RC : Finset (Fin q × X) × Finset (Fin q → Y))",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "the row labeling",
+      "anchor": "{L : ℕ} (hL : L ≤ q) (lab : Fin q × X → Fin L)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "the threshold inequality",
+      "anchor": "(hqT : q * ⌈(2 : ℝ) ^ (1 - b) * (Fintype.card X : ℝ)⌉₊",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "the failure hypothesis",
+      "anchor": "(hfail : ¬ NoWasteConclusion (Finset.univ : Finset (Fin q)) RC.1 lab",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:failure-to-separate-gives-gap",
+      "matchLabel": "the conclusion: a hard part exists",
+      "anchor": "∃ j : Fin L, D f + 1 ≤",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "base matrix and constants",
+      "anchor": "[DecidableEq Y] (f : X → Y → Bool) {b ε : ℝ} (hb : 1 ≤ b) (hε : 0 ≤ ε)",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "log-scale naturals T, R",
+      "anchor": "(T R : ℕ) (hTb : (T : ℝ) ≤ b)",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "the abstract family S",
+      "anchor": "{L : ℕ} (S : Fin L → Fin (2 ^ (R + T)) → Y)",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "S is balanced",
+      "anchor": "(hS : IsBalancedFamily (2 ^ T) S ε)",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "seed parameters and ranges",
+      "anchor": "(pseed : ℕ) {xseed h hseed : ℝ}",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "column loss resilience",
+      "anchor": "(hres : IsColumnLossResilient f b ε (R + T) T h)",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "quantitative bridge conditions",
+      "anchor": "(hseedbd : D f + T ≤ Dfamily (interlaceFun f pseed)",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:Extension",
+      "matchLabel": "submatrix conditions and conclusion",
+      "anchor": "(R' : Finset (Fin (2 ^ (R + T)) × X)) (C' : Finset (Fin L))",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:upper-partition",
+      "matchLabel": "theorem setup",
+      "anchor": "theorem comp_le_partition {A B : Type*} [Fintype A] [Fintype B]",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:upper-partition",
+      "matchLabel": "the game and the split",
+      "anchor": "(g : A → B → Bool) (s c : ℕ) (σ : A → Fin (2 ^ s))",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:upper-partition",
+      "matchLabel": "per-class subprotocol hypothesis",
+      "anchor": "(hc : ∀ k : Fin (2 ^ s), D (fun (x : {x : A // σ x = k}) (y : B) => g x.val y) ≤ c) :",
+      "occurrence": 1
+    },
+    {
+      "node": "def:S-family",
+      "matchLabel": "the accuracy parameter",
+      "anchor": "noncomputable def epsQT (q t : ℕ) : ℝ :=",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:stage1-threshold",
+      "matchLabel": "the theorem signature",
+      "anchor": "theorem stage1_threshold (d : ℕ) (hd : 2 ≤ d)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:stage1-threshold",
+      "matchLabel": "balancedness bound",
+      "anchor": "(hbal : Params.t1 d ≤ Params.q1 d + 5)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:stage1-threshold",
+      "matchLabel": "large-a-versus-t1 bound",
+      "anchor": "(hta : Params.a d + 2 ≤ Params.t1 d) :",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:M1LowColumnStage2",
+      "matchLabel": "theorem signature",
+      "anchor": "theorem M1_low_column_stage2 (d : ℕ) (hd : 2 ≤ d)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:M1LowColumnStage2",
+      "matchLabel": "structural size checks",
+      "anchor": "(hchk : Params.t1 d ≤ Params.q1 d + 5)",
+      "occurrence": 1
+    },
+    {
+      "node": "cor:M1-complexity",
+      "matchLabel": "the setup parameter",
+      "anchor": "theorem M1_complexity (d : ℕ) (hpow : IsPow2 d)",
+      "occurrence": 1
+    },
+    {
+      "node": "cor:M1-complexity",
+      "matchLabel": "the large-d hypothesis",
+      "anchor": "(hlog : 64 ≤ Nat.log 2 d) :",
+      "occurrence": 1,
+      "label": "the large-d condition and the result",
+      "concept": "Under this large-d assumption (base-2 logarithm of d at least 64, i.e. d at least 2^64), the theorem's conclusion is that the complexity measure D of the construction M1 at d equals a(d) + 1 — exactly one more than the parameter a(d)."
+    },
+    {
+      "node": "lem:M1TerminalStage2",
+      "matchLabel": "complexity bound conclusion",
+      "concept": "Concludes (D(M1 d) : Int) - log2(r1 d) <= Dfamily of the terminal one-copy bracket. Thus the terminal family retains all but at most log2(r1 d) bits of M1's communication complexity.",
+      "reviewNote": "Wording reconciled with the advanced artifact while preserving the audited mathematical correction."
+    },
+    {
+      "node": "lem:M2-column-loss-resilient",
+      "matchLabel": "the residual rung hypothesis",
+      "concept": "Requires D(M1T d) - k <= LambdaGE(...) for every allowed loss k and column count c. Thus the residual complexity target is bounded above by the available Lambda lower bound; reversing this inequality would not establish column-loss resilience.",
+      "reviewNote": "Wording reconciled with the advanced artifact while preserving the audited mathematical correction."
+    },
+    {
+      "node": "lem:MFourDiagonalCopy",
+      "matchLabel": "theorem name and size",
+      "anchor": "theorem M4_diagonal_copy (d : ℕ) {n : ℕ}",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:MFourDiagonalCopy",
+      "matchLabel": "the inputs",
+      "anchor": "(v : Fin n → Fin (Params.q2 d) → Bool) (p : Fin 4) :",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:MFourDiagonalCopy",
+      "matchLabel": "left side: restricted M4",
+      "anchor": "(fun (c : C2 d) (r : R2 d) =>",
+      "occurrence": 1,
+      "concept": "Defines the left-hand function of two arguments — a template-row index `c` (ranging over `C2 d`) and a column index `r` (ranging over `R2 d`) — as the entry of the big matrix `M4` at the template row `(p, c)` and at the column obtained by applying `diagCopyCol` to the two components of `r`."
+    },
+    {
+      "node": "lem:M1PlusVectorsIsInterlace",
+      "matchLabel": "activity bound hypothesis",
+      "anchor": "(hA : (activeSet v α).card ≤ 4) :",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:MThreeFuzzyLeaves",
+      "matchLabel": "dense-depth and sigma bounds",
+      "concept": "Relates M2DenseDepth d to q2 d via a power-of-two identity (hqcast), and constrains the quantity 1 - 8 * Params.h2 d to be greater than 0 and at most 1 (hsigma0, hsigma1), setting up a 'sigma' scaling factor used in the dense regime."
+    },
+    {
+      "node": "thm:reduction-gap",
+      "matchLabel": "the theorem signature",
+      "anchor": "theorem reduction_gap (I : VBPInstance) (hI : I.Promise) :",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:reduction-gap",
+      "matchLabel": "YES side of the gap",
+      "anchor": "(I.IsYes →",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:main-nphard-intro",
+      "matchLabel": "theorem signature",
+      "anchor": "theorem main_np_hardness :",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:main-nphard-intro",
+      "matchLabel": "promise and size bounds",
+      "anchor": "(vbp_np_hard.toVBP G).Promise ∧",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:main-nphard-intro",
+      "matchLabel": "scale bound",
+      "anchor": "ctorScaleFull (vbp_np_hard.toVBP G)",
+      "occurrence": 1
+    },
+    {
+      "node": "thm:main-nphard-intro",
+      "matchLabel": "row count bound",
+      "anchor": "((Fintype.card (R4 (ctorScaleFull (vbp_np_hard.toVBP G))",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "the theorem signature",
+      "anchor": "theorem M2_upper_bound (d : ℕ)",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "the hypothesis",
+      "anchor": "(hclog : Nat.clog 2 (Params.q2 d) = Nat.log 2 (Params.q2 d)) :",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "the conclusion bound",
+      "anchor": "D (M2 d) ≤ D (M1 d) + Nat.log 2 (Params.q2 d) := by",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "setting up the exponent",
+      "anchor": "let Qlog := Nat.clog 2 (Params.q2 d)",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "the row-index encoding",
+      "anchor": "let σ : R2 d → Fin (2 ^ Qlog) := fun r => Fin.cast hqpow r.1",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "reduction to a partition bound",
+      "anchor": "have hpart : D (M2 d) ≤ Qlog + D (M1 d) := by",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "bounding the remaining branch by M1T",
+      "anchor": "have hmap :",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m2-midlayer",
+      "matchLabel": "branch equals M1T column lookup",
+      "anchor": "have hbranch :",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-budget",
+      "matchLabel": "the target definition's signature",
+      "anchor": "def M3BudgetColumnTarget",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-budget",
+      "matchLabel": "first conjunct: fixed column bits",
+      "anchor": "(forall p,",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-budget",
+      "matchLabel": "second conjunct: witness column exists",
+      "anchor": "(forall p alpha,",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-budget",
+      "matchLabel": "cost-bound theorem's setup",
+      "anchor": "theorem M3_binResidual_cost_le_M2",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-budget",
+      "matchLabel": "the cost-bound conclusion",
+      "anchor": "forall p, (binBranch p).residual.cost <= D (M2 d) := by",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-budget",
+      "matchLabel": "next theorem: subgame complexity bound",
+      "anchor": "theorem M3_binResidual_subgame_D_le_cost",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-stopdata",
+      "matchLabel": "the structure declaration",
+      "anchor": "structure Stage3StopData",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-stopdata",
+      "matchLabel": "the ambient_col theorem signature",
+      "anchor": "theorem Stage3StopData.ambient_col",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-stopdata",
+      "matchLabel": "computation and budget hypotheses",
+      "anchor": "(hcomp : Q.Computes G) (hbudget : Q.cost <= m + Bcap)",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-stopdata",
+      "matchLabel": "the stopping-data hypothesis",
+      "anchor": "(hdata : Stage3StopData G Q R C m Bcap) :",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-stopdata",
+      "matchLabel": "the ambient conclusion",
+      "anchor": "Protocol.FirstKColBitsOn",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-binreindex-witness",
+      "matchLabel": "the packaged output",
+      "concept": "For a given row a, the function returns that row's diagonal column value M3_diagCol (after re-indexing the row via the width cast) paired with the proof that this column really does lie in branch p's column set — so the result is a genuine member of that column set."
+    },
+    {
+      "node": "aux:m3-binbranch-char",
+      "matchLabel": "signature and type params",
+      "anchor": "theorem Protocol.mkBranchAt_of_rowPrefix_rows",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-binbranch-char",
+      "matchLabel": "protocol, function, and depth",
+      "anchor": "(P : Protocol A B Bool) (G : A -> B -> Bool)",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-binbranch-char",
+      "matchLabel": "first-k-row-bits hypothesis",
+      "anchor": "(hrow : Protocol.FirstKRowBitsOn",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-binbranch-char",
+      "matchLabel": "correctness hypothesis",
+      "anchor": "(hP : P.Computes G)",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-binbranch-char",
+      "matchLabel": "nonemptiness hypotheses",
+      "anchor": "(hrows : (Protocol.rowPrefixRows t P j).Nonempty)",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-binbranch-char",
+      "matchLabel": "the conclusion",
+      "anchor": "(Protocol.mkBranchAt_of_rowPrefix P G t j hrow hP hrows hcols).rows =",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-package",
+      "matchLabel": "evaluation corollary",
+      "concept": "States M3_fiber_cRep_eval, the companion corollary to the membership one: applying S2fam at alpha to the chosen representative returns the target r exactly — the second half (.2) of the spec theorem's two guarantees."
+    },
+    {
+      "node": "aux:m3-package-final",
+      "matchLabel": "definition and core size",
+      "anchor": "noncomputable def M3_fuzzy_leaves_sync_bridge",
+      "occurrence": 1
+    },
+    {
+      "node": "aux:m3-package-final",
+      "matchLabel": "dense-depth cast and sigma bounds",
+      "concept": "Assumes 2 to the power of M2DenseDepth d equals Params.q2 d (a consistency cast between two ways of expressing the same quantity), and that 1 minus 8 times h2 d is strictly greater than 0 and at most 1."
+    },
+    {
+      "node": "aux:gate-full",
+      "matchLabel": "final ratio gate and conclusion",
+      "anchor": "gateM2Robust d := by",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:lambda-row-step",
+      "matchLabel": "lemma signature",
+      "anchor": "theorem lemma_A3_row_ladder_step",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:lambda-row-step",
+      "matchLabel": "matrix and index parameters",
+      "anchor": "(M : BoolMat) (p : ℕ) (hp : 1 ≤ p) (δ : ℕ) (hδ : δ ≤ 1) (x y : ℝ)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:lambda-row-step",
+      "matchLabel": "range constraints on x, y",
+      "anchor": "(hxy : 0 < x ∧ x ≤ 1 / 2 ∧ 0 < y ∧ y ≤ 1)",
+      "occurrence": 1
+    },
+    {
+      "node": "lem:lambda-row-step",
+      "matchLabel": "the density hypothesis",
+      "anchor": "(h1 : DSet (bracket M (2 * p) (2 * x) (y / 4)) ≥ 1) :",
+      "occurrence": 1
+    }
+  ]
+}

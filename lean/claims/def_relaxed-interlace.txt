@@ -4,8 +4,9 @@ by an indexed column family `S : Fin L → (Fin q → Y)` is the game whose rows
 are the classical interlace rows `Fin q × X` and whose columns are the FAMILY
 INDICES `Fin L` (so repeated tuples give genuinely distinct columns), with
 value `f x (S j i)` at row `(i, x)` and column `j`. With `S` enumerating the
-full product this recovers the classical interlace up to column relabeling;
-with a balanced family it is the polynomial-size object of §4. -/
+full product this recovers the classical interlace up to column relabeling.
+The paper uses a balanced family as a succinct substitute; its exact
+cardinality bound and the external asymptotic wrapper are tracked separately. -/
 def relaxedInterlace {X Y : Type*} (f : X → Y → Bool)
     {q L : ℕ} (S : Fin L → Fin q → Y) :
     (Fin q × X) → Fin L → Bool :=

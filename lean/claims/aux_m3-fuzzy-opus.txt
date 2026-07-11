@@ -137,7 +137,7 @@ theorem M1_dense_column_subgame_floor
         <= (1 - Params.eta2 d) * (Fintype.card (C1 d) : Real) := by
           apply mul_le_mul_of_nonneg_right _ hcard_nonneg
           have hcast : (-(Params.b1 d + Nat.log 2 (Params.r2 d) : Int)) =
-              (-((Params.b1 d : Int) + Nat.log 2 (Params.r2 d))) := by push_cast; ring
+              (-((Params.b1 d : Int) + Nat.log 2 (Params.r2 d))) := by ring
           rw [hcast]; exact hsurv
       _ <= (Yalpha.card : Real) := hYdense
   -- The row equipartition for r'=r1 needs a Q with 16|Q| = 9*r1*t1; take R'=univ.

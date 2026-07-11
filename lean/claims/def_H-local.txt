@@ -9,7 +9,7 @@ is the restriction of the full `(q₁+5)`-coordinate relaxed interlace
 indices) kept, rows embedded through `Fin.castLE` exactly as `M₁` embeds
 through `baseIdx` (never a raw ℕ offset).
 
-Threshold-risk spelling (binding ruling): the ambient coordinate count is
+The ambient coordinate count is
 `Params.q1 d + 5` — definitionally the carrier of `S1fam`/`M1hat`, so
 `𝓗_{q₁+5}(C₁) = M̂₁` and `𝓗_{q₁}(C₁) = M₁` hold by `rfl` — not the paper's
 `2^a+3`, which equals it only propositionally under `2 ≤ d`

@@ -1,5 +1,9 @@
 # Lean formalization of "NP-Completeness of Deterministic Communication Complexity via Relaxed Interlacing"
 
+> **Historical planning document.** It records the original workflow and may
+> contain obsolete paths, targets, or scope language. Use `../AUDIT.md` and
+> `README.md` for the current release.
+
 > **STRATEGY UPDATE 2026-07-06 (user-endorsed, per GPT-5.5 Pro review): CONTACT-FIRST.**
 > Email the Beyond-the-Library team proposing this paper as their next benchmark /
 > collaboration (draft + deployment pack in `deployment-pack/`); run only a capped one-week

@@ -2,10 +2,10 @@
 /-- Paper source problem (`sec:encoding-interface`, `\DefineProblemNoPara`):
 a `{0,1}`-`d`-Dimension Vector Bin Packing instance, restricted as the
 reduction consumes it. The capacity `c = 1` and the bin count `m = 4` are
-hard-wired (D1): they appear only through `IsYes` quantifying over `Fin 4`
+hard-wired: they appear only through `IsYes` quantifying over `Fin 4`
 bins with per-bin/per-coordinate load at most `1`. The structure carries
 exactly the data `n` vectors in `{0,1}^d`; the promise is a SEPARATE
-predicate (`VBPInstance.Promise`), never a field, so the Layer-B wrapper can
+predicate (`VBPInstance.Promise`), never a field, so the final wrapper can
 feed unpromised instances through the preprocessor. -/
 structure VBPInstance where
   /-- Ambient dimension `d`. -/
@@ -15,18 +15,17 @@ structure VBPInstance where
   /-- The vectors `v_1, …, v_n ∈ {0,1}^d`, as Boolean coordinate functions. -/
   v : Fin n → Fin d → Bool
 
-/-- YES-instance predicate, `c = 1`, `m = 4` (D1): a TOTAL bin assignment
+/-- YES-instance predicate, `c = 1`, `m = 4`: a total bin assignment
 `σ : Fin n → Fin 4` such that every bin `p` and coordinate `α` receive at
 most one vector with a `1` at `α` (the `‖Σ_{v ∈ B_p} v‖_∞ ≤ 1` condition,
-per-coordinate). Set-builders test `v i α = true` explicitly (Bool-coercion
-ruling). -/
+per-coordinate). Set-builders test `v i α = true` explicitly. -/
 def VBPInstance.IsYes (I : VBPInstance) : Prop :=
   ∃ σ : Fin I.n → Fin 4, ∀ (p : Fin 4) (α : Fin I.d),
     (Finset.univ.filter (fun i => σ i = p ∧ I.v i α = true)).card ≤ 1
 
 /-- The source-side promise (paper: `Σ_i v_i(α) ≤ 4` for every coordinate):
 at most four vectors carry a `1` in any coordinate. Kept SEPARATE from the
-structure (D1); instances violating it are immediate NO-instances and the
+structure; instances violating it are immediate NO-instances and the
 reduction pre-screens them. Stage-4's `π_α` injections are gated on this. -/
 def VBPInstance.Promise (I : VBPInstance) : Prop :=
   ∀ α : Fin I.d, (Finset.univ.filter (fun i => I.v i α = true)).card ≤ 4

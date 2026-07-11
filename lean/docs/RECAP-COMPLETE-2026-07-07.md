@@ -1,4 +1,9 @@
-# Formalization COMPLETE — arXiv:2508.05597 machine-verified in Lean 4
+# Historical completion snapshot - 2026-07-07
+
+> **Superseded scope language.** This file records what the project claimed at
+> that date. It is not the current trust statement, and its use of
+> "machine-verified" is broader than the theorem type supports. See
+> `../AUDIT.md`, `../PAPER-FINDINGS.md`, and `STOC-READINESS.md`.
 
 **2026-07-07; axiom-footprint updated after the 2026-07-09 VBP discharge.**
 The Gaspers–He–Mackenzie
@@ -10,9 +15,9 @@ axiom plus Lean's standard three.
 From `C:\lean\npc-cc`:
 - `lake build NPCC` → **Build completed successfully (8528 jobs)**, exit 0.
 - `#print axioms NPCC.main_np_hardness` →
-  `[propext, Classical.choice, NPCC.aghp_balanced_family_exists, Quot.sound]`.
+  `[propext, Classical.choice, NPCC.finite_alphabet_balanced_family_exists, Quot.sound]`.
 - Repo-wide `sorry`-token scan over `Npcc/*.lean` → **0 hits**.
-- `axiom` declarations in `Npcc/` → **exactly 1** (`aghp_balanced_family_exists`).
+- `axiom` declarations in `Npcc/` → **exactly 1** (`finite_alphabet_balanced_family_exists`).
 - `vbp_np_hard` is now a proved `def` package in `Npcc/Wrapper.lean`, not a citation axiom.
 
 Source mirror: `formalization/lean-mirror.bundle` (git bundle, refreshed). Final
@@ -36,7 +41,7 @@ Kernel certifies **construction size bounds + the NO⟺GAP separation**. Polynom
 remain Layer-B prose — deliberately NOT in the kernel statement.
 
 ## The citation axiom and discharged VBP package
-- `aghp_balanced_family_exists` (`Npcc/Axioms.lean`) — Alon–Goldreich–Håstad–Peralta balanced families (existence; poly-time constructibility is prose).
+- `finite_alphabet_balanced_family_exists` (`Npcc/Axioms.lean`) — Alon–Goldreich–Håstad–Peralta balanced families (existence; poly-time constructibility is prose).
 - `vbp_np_hard` (`Npcc/Wrapper.lean`) — formerly tracked as a citation axiom, now discharged as the proved `VBP4PromiseHardnessPackage`: the endpoint-incidence construction, promise preservation, YES equivalence, and monomial size bounds are kernel-checked. The standard NP-hardness of 4-Colouring and polynomial runtime of the map remain Layer-B prose.
 
 ## Ratification pile — for your final review (all backed by CORRECT C5 judges)

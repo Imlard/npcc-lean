@@ -9,8 +9,8 @@ def ceilPowTwo (z : ℕ) : ℕ := 2 ^ Nat.clog 2 z
 theorem le_ceilPowTwo (z : ℕ) : z ≤ ceilPowTwo z :=
   Nat.le_pow_clog one_lt_two z
 
-/-- The typed padding equivalence (Deep Think delta: padded coordinates are
-distinguishable from original coordinates IN THE TYPES): the coordinate set
+/-- The typed padding equivalence keeps padded coordinates distinguishable
+from original coordinates in the type: the coordinate set
 of a `d`-dimensional instance padded to `D ≥ d` dimensions is the tagged sum
 of the original `Fin d` and the padding block `Fin (D − d)`. -/
 def padCoordEquiv {d D : ℕ} (h : d ≤ D) : (Fin d ⊕ Fin (D - d)) ≃ Fin D :=
@@ -22,11 +22,9 @@ by trailing zero coordinates. Original coordinates enter through
 `Sum.inl`, padding through `Sum.inr` (identically `false`); the anchors are
 carried over unchanged and stay all-zero.
 
-`dstar` is passed EXPLICITLY: the paper's `d_star` is the constant delivered
-by the (still open) `lem:large-d-checklist` via `Classical.choice` (D3), so
-this definition cannot yet refer to it — the composed reduction will
-instantiate `dstar := d_star` once that obligation lands (RATIFICATION
-FLAG). -/
+`dstar` is an explicit argument so this elementary normaliser remains separate
+from the large-parameter proof. The final construction instantiates it with
+`d_star`, selected from `large_d_checklist`. -/
 def normalizeInstance (dstar : ℕ) (I : PreprocessedInstance) :
     PreprocessedInstance where
   d := ceilPowTwo (max I.d dstar)

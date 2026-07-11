@@ -1,6 +1,6 @@
 -- CLAIM-BEGIN lem:M0-column-loss-resilient
-/-- **`lem:M0-column-loss-resilient`** (statement authored to the ledger spec —
-NO tex label; flagged for the judge). The seed `(M₀, b)` is `(2^Q, 2^T, h)`-
+/-- **`lem:M0-column-loss-resilient`** (an internal lemma without a separate
+paper label). The seed `(M₀, b)` is `(2^Q, 2^T, h)`-
 column-loss resilient (`NPCC.IsColumnLossResilient`) whenever the row density
 `2^{−b} ∈ (0,1]` (i.e. `0 ≤ b`) and every consumed one-copy loss density lies in
 `(1/2, 1]`: at the clause-(i) argument `c = Q + D M₀` and, for clause (ii)

@@ -1,5 +1,9 @@
 # PIPELINE-SPEC v1 — the minimal formalization loop (decision (b), 2026-07-06)
 
+> **Historical pipeline specification.** This records the production process,
+> not the current mathematical trust boundary. See `../AUDIT.md` and
+> `../BUILD.md` for release verification.
+
 **Objective.** One pipeline, one target: drive the Target-A then Target-B obligations of the
 NP-hardness formalization to sorry-free, axiom-audited, faithfulness-signed Lean, using the
 Beyond-the-Library blueprint. The pipeline exists to be *tuned in place*, not extended.

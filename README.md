@@ -1,62 +1,102 @@
-# NP-Completeness of Deterministic Communication Complexity — machine-verified in Lean 4
+# Lean-checked communication-complexity gap construction
 
-A machine-checked **Lean 4** formalization of the core reduction in *NP-Completeness of
-Deterministic Communication Complexity via Relaxed Interlacing* (Gaspers, He, Mackenzie;
-arXiv:2508.05597 v4), with an interactive **paper &harr; Lean explorer**.
+This repository accompanies *NP-Completeness of Deterministic Communication
+Complexity via Relaxed Interlacing* (Gaspers, He, Mackenzie;
+[arXiv:2508.05597](https://arxiv.org/abs/2508.05597)). It contains a Lean 4
+formalization of the paper's combinatorial gap construction and an interactive
+paper-to-Lean explorer.
 
-> **Scope of the machine check.** The Lean kernel verifies the **size-bounded gap reduction**: a
-> 4-Colouring instance is mapped to a communication-complexity gap instance with `YES ⟺ small
-> protocol` and polynomial size bounds. The remaining ingredients of the full NP-completeness
-> statement — polynomial-time constructibility, membership in NP, and 4-Colouring's own NP-hardness
-> — are the paper's prose / standard external results, **not** formalized here.
+## Exact checked result
 
-## Live explorers
+For every loopless edge-list instance `G` of 4-Colouring, Lean selects a typed
+Boolean matrix `gapMatrix G`, pads it to a square power-of-two truth table
+`gapTruthTable G`, and proves
 
-**Term inspector (recommended) — for readers who don't know Lean:**
-### https://imlard.github.io/npcc-lean/inspector/
-Every identifier in a Lean statement is clickable and hoverable → a definition card in plain
-English *and* the source, with the mathematics **typeset**; a **"check these translations by
-hand"** panel on the main theorem and the cited axiom; draggable multi-windows; and a **UI-size**
-control to calibrate the text for your screen.
+```text
+G is 4-colourable  <->  D(gapTruthTable G) <= gapBudget G
+not 4-colourable  <->  gapBudget G + 1 <= D(gapTruthTable G).
+```
 
-**Original explorer:**
-### https://imlard.github.io/npcc-lean/
-The dependency graph + PDF tracer, with every formalized statement highlighted in place.
+The second line is the one-more-bit form of the same threshold equivalence. It
+does **not** claim that the NO-instance cost is always exactly one bit larger.
+Lean also proves `D(gapTruthTable G) = D(gapMatrix G)`: padding only
+duplicates existing rows and columns. The short public statements are in
+`lean/NPCC/Public.lean`.
 
-Both are bidirectional (paper &harr; Lean &harr; graph), inspired by
-[formalarXiv](https://beyondthelibrary.github.io/formal_arxiv/).
+The development also proves the source preprocessing specification, explicit
+row/column carrier bounds, one fixed-degree polynomial dominating both
+carriers in `|V|+|E|+1`, and a fixed-degree bound on the final truth-table bit
+count. It builds with zero
+`sorry` declarations. The transitive project-specific assumption is exactly
+`NPCC.finite_alphabet_balanced_family_exists`, in addition to Lean's standard `propext`,
+`Classical.choice`, and `Quot.sound`.
 
-## What's in here
-- `inspector/index.html` — the term-inspector explorer (self-contained single page).
-- `index.html`, `pages/`, `paper.pdf` — the original explorer site (served by GitHub Pages).
-- `lean/` — the complete Lean 4 project, browsable source.
-- `npcc-lean-formalization.zip` — the same project as a one-click download.
+## Formal boundary
 
-## The result
-`lean/` builds with **0 sorries**. `NPCC.main_np_hardness` rests on Lean's `propext`,
-`Classical.choice`, and `Quot.sound` plus exactly **one** cited axiom:
-- `aghp_balanced_family_exists` — existence of the balanced column family (Alon–Goldreich–Håstad–Peralta 1992).
+The checked theorem is **not yet a formal polynomial-time many-one reduction**.
+The following remain outside Lean:
 
-The 4-Colouring → Vector-Bin-Packing reduction (paper Proposition 42) was **formerly a second
-axiom (`vbp_np_hard`); it is now discharged** — a proved Lean `def` whose correctness (`YES ⟺ YES`)
-and size bounds are machine-checked, so `#print axioms NPCC.main_np_hardness` no longer lists it.
+- serialized bit-level source and target languages, including the formal
+  relation between their encoding lengths and the checked combinatorial size;
+- an executable balanced-family generator and its running-time proof;
+- membership of the target decision problem in NP;
+- the standard NP-hardness of 4-Colouring.
 
-62 of the paper's 65 numbered statements are formalized: **128 proved** in `lean/Npcc/` (this work,
-including the discharged reduction) and **8 reused** from the sorry-free Mackenzie–Saffidine
-`lean/Workspace/` layer. The remaining 3 are two-copy exposition variants the proof deliberately
-routes around.
+The matrix construction is noncomputable because it chooses balanced families
+from the cited existence axiom. AGHP supplies the historical binary
+almost-independence construction. The exact arbitrary-alphabet, relative-error
+interface is sourced through Bshouty's derandomized Chernoff sampler and its
+arbitrary-alphabet extension; the cylinder-event parameter translation is
+recorded in
+[`BALANCED-FAMILY-CITATION.md`](lean/docs/BALANCED-FAMILY-CITATION.md).
 
-## Build
-Requires Lean 4.30.0 (`lean/lean-toolchain`) and `lake`:
+See [`lean/AUDIT.md`](lean/AUDIT.md) for the full trust report and
+[`lean/PAPER-FINDINGS.md`](lean/PAPER-FINDINGS.md) for paper-to-Lean differences.
+The shorter [`reviewer guide`](lean/docs/REVIEWER-GUIDE.md) gives a one-hour
+route through the checked theorem and its external boundary.
+
+## Live explorer
+
+- [Term inspector](https://simonwmackenzie.github.io/npcc-lean/inspector/)
+- [Dependency graph and PDF tracer](https://simonwmackenzie.github.io/npcc-lean/)
+
+Both views link paper statements, Lean statements, and dependencies in both
+directions. The downloadable Lean project is also available as
+`npcc-lean-formalization.zip`.
+
+## Repository layout
+
+- `lean/NPCC/` - the paper-facing construction and proof.
+- `lean/NPCC/Public.lean` - concise public theorem surface.
+- `lean/NPCC/Padding.lean` - square power-of-two padding and exact `D`
+  preservation.
+- `lean/Workspace/` - reused, sorry-free communication-complexity library.
+- `lean/claims/` and `lean/obligations.json` - statement ledger.
+- `lean/pipeline/verify.mjs` - release-integrity checks.
+- `lean/pipeline/package-release.py` - reproducible release bundle and checksum.
+- `index.html`, `inspector/index.html`, `pages/`, `paper.pdf` - explorer site.
+
+The explorer maps 62 of the paper's 65 numbered statements. The three omitted
+statements (Corollary 17, Lemma 35, and Corollary 36 in arXiv v4) are not merely
+cosmetic variants: as printed, they inherit a missing low-complexity guard. They
+are not used by the final checked chain; see `lean/PAPER-FINDINGS.md`.
+
+## Reproduce
+
+Lean 4.30.0 is pinned by `lean/lean-toolchain`.
 
 ```sh
 cd lean
-lake exe cache get      # prebuilt Mathlib cache
-lake build NPCC         # 0 sorries
+lake exe cache get
+lake build NPCC Workspace Tests
+node pipeline/verify.mjs --lean
 ```
 
-GitHub Actions also runs `lake build NPCC` and the axiom-footprint reports in
-`.github/workflows/lean.yml`.
+Release bundles are rebuilt with `python pipeline/package-release.py`; the
+verifier checks the ZIP, both embedded downloads, and its SHA-256 checksum.
 
-## Paper
-arXiv:2508.05597 — https://arxiv.org/abs/2508.05597
+GitHub Actions runs the same checks on both Linux and Windows.
+
+Citation metadata is in `CITATION.cff`. A repository license has not yet been
+selected; that decision must be made before asking others to redistribute or
+build derivative artifacts.

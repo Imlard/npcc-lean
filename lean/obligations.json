@@ -544,7 +544,7 @@
    "id": "axiom:aghp",
    "kind": "axiom-decl",
    "deps": [],
-   "lean_name": "NPCC.aghp_balanced_family_exists",
+   "lean_name": "NPCC.finite_alphabet_balanced_family_exists",
    "file": "NPCC/Axioms.lean",
    "statement_tex": "\\begin{remark}[Explicit balanced families]\\label{rem:balanced-columns-exist}\n    Standard explicit constructions of almost \\(t\\)-wise independent sample\n    spaces over finite alphabets, such as the one due to\n    \\citet{alon1992simple}, yield \\((q,t)\\)-balanced column families of size\n    at most\n    \\[\n        \\poly(q)\\,|Y|^{O(t)}\\,\\eps^{-O(1)}.\n    \\]\n    Moreover, such a family can be constructed deterministically in time\n    polynomial in this bound, and hence in time\n    \\[\n        \\poly(q)\\,|Y|^{O(t)}\\,\\eps^{-O(1)}.\n    \\]\n    Throughout the paper we will take\n    \\[\n        \\eps_{q,t}=(2qt)^{-c}\n    \\]\n    for a sufficiently large absolute constant \\(c>0\\), so that\n    \\[\n        |S_{q,t}(Y)|=\\poly(q,|Y|^t).\n    \\]\n    In particular, for this choice of \\(\\eps_{q,t}\\), the family\n    \\(S_{q,t}(Y)\\) is computable in time \\(\\poly(q,|Y|^t)\\).\n\\end{remark}",
    "spec": "AUTHORIZED CITATION AXIOM (Simon 2026-07-06; Alon-Goldreich-Hastad-Peralta 1992, paper rem:balanced-columns-exist): existence, for all q >= t >= 1, finite Y, eps in (0,1), of a (q,t)-balanced indexed family (L, S : Fin L -> (Fin q -> Y)) with accuracy eps and an explicit polynomial size bound (single absolute constant C: L <= ((q+2) * (Fintype.card Y + 2))^(C * t) * (Nat.ceil (1/eps))^C or equivalent explicit form). Balancedness per paper def:balanced-columns: for every J (Finset (Fin q)) with card <= t and every pattern a : (Fin q) -> Y, the fraction of indices whose tuple agrees with a on J lies within eps/|Y|^|J| of 1/|Y|^|J| — rendered with rational/real arithmetic over Finset.card counts. Poly-time CONSTRUCTIBILITY deliberately excluded (Layer-B wrapper). Axiom statement requires FULL judge treatment (dual-vendor + Ultra packet) before declaration; runner config already allows the name.",
@@ -560,7 +560,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -570,7 +570,7 @@
    "deps": [],
    "lean_name": "NPCC.vbp_np_hard",
    "file": "NPCC/Wrapper.lean",
-   "spec": "FORMALIZED reduction (discharged 2026-07-09 — no longer an axiom): the 4-Colouring to {0,1}-VBP (c=1, m=4) many-one reduction, packaged as VBP4PromiseHardnessPackage. Machine-checked in Lean: the construction toVBP (one vector per vertex, one coordinate per edge), the YES-iff-YES correctness (toVBP_yes_iff), the per-coordinate promise (toVBP_promise), and the monomial size bounds. The kernel footprint of main_np_hardness no longer lists vbp_np_hard (it is propext, Classical.choice, Quot.sound, aghp only). Left to prose/external (Layer-B, unchanged): the map's polynomial runtime (trivial by inspection; paper Prop 42 leaves it implicit) and 4-Colouring's own NP-hardness. Previously a citation axiom; its satisfiability had been independently certified at declaration (brute-forced 251 small graphs plus the K_k boundary).",
+   "spec": "FORMALIZED reduction (discharged 2026-07-09 — no longer an axiom): the 4-Colouring to {0,1}-VBP (c=1, m=4) many-one reduction, packaged as VBP4PromiseHardnessPackage. Machine-checked in Lean: the construction toVBP (one vector per vertex, one coordinate per edge), the YES-iff-YES correctness (toVBP_yes_iff), the per-coordinate promise (toVBP_promise), and the monomial size bounds. The kernel footprint of main_np_hardness no longer lists vbp_np_hard; beyond Lean's standard classical axioms, it lists only finite_alphabet_balanced_family_exists. Left to prose/external (Layer-B, unchanged): the map's polynomial runtime (trivial by inspection; paper Prop 42 leaves it implicit) and 4-Colouring's own NP-hardness. Previously a citation axiom; its satisfiability had been independently certified at declaration (brute-forced 251 small graphs plus the K_k boundary).",
    "status": "proved",
    "signed_off": true,
    "attempts": [
@@ -1204,7 +1204,7 @@
    "lean_name": "NPCC.scaffoldFamily",
    "file": "NPCC/VBP.lean",
    "statement_tex": "\\begin{remark}[Explicit balanced families]\\label{rem:balanced-columns-exist}\n    Standard explicit constructions of almost \\(t\\)-wise independent sample\n    spaces over finite alphabets, such as the one due to\n    \\citet{alon1992simple}, yield \\((q,t)\\)-balanced column families of size\n    at most\n    \\[\n        \\poly(q)\\,|Y|^{O(t)}\\,\\eps^{-O(1)}.\n    \\]\n    Moreover, such a family can be constructed deterministically in time\n    polynomial in this bound, and hence in time\n    \\[\n        \\poly(q)\\,|Y|^{O(t)}\\,\\eps^{-O(1)}.\n    \\]\n    Throughout the paper we will take\n    \\[\n        \\eps_{q,t}=(2qt)^{-c}\n    \\]\n    for a sufficiently large absolute constant \\(c>0\\), so that\n    \\[\n        |S_{q,t}(Y)|=\\poly(q,|Y|^t).\n    \\]\n    In particular, for this choice of \\(\\eps_{q,t}\\), the family\n    \\(S_{q,t}(Y)\\) is computable in time \\(\\poly(q,|Y|^t)\\).\n\\end{remark}",
-   "spec": "AGHP axiom instantiation: choice-extract the two concrete balanced families C1 = S_{q1+5,t1}(Cols M0) and (Stage-2) S_{q2,t2}(R1) at accuracy eps_{q,t} = (2qt)^{-c}, c from the axiom's absolute constant. VERIFIED: NPCC.aghp_balanced_family_exists carries the explicit size clause L <= (q+2)^C (|Y|+2)^{Ct} ceil(1/eps)^C, so downstream size bounds (lem:polytime) are provable in-kernel. Poly-TIME constructibility is deliberately NOT available (Layer-B).",
+   "spec": "Balanced-family citation-interface instantiation: choice-extract the two concrete families C1 = S_{q1+5,t1}(Cols M0) and (Stage-2) S_{q2,t2}(R1) at accuracy eps_{q,t} = (2qt)^{-c}, c from the interface's absolute constant. VERIFIED: NPCC.finite_alphabet_balanced_family_exists carries the explicit size clause L <= (q+2)^C (|Y|+2)^{Ct} ceil(1/eps)^C, so downstream size bounds (lem:polytime) are provable in-kernel. The AGHP/Bshouty source chain and parameter translation are recorded in docs/BALANCED-FAMILY-CITATION.md. Polynomial-time constructibility is deliberately NOT available (Layer-B).",
    "status": "proved",
    "attempts": [],
    "signed_off": true,
@@ -1267,7 +1267,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1309,7 +1309,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1337,7 +1337,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1358,7 +1358,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1385,7 +1385,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1407,7 +1407,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1433,7 +1433,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1456,7 +1456,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1481,7 +1481,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1505,7 +1505,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1534,7 +1534,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1559,7 +1559,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1586,7 +1586,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1610,7 +1610,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1644,7 +1644,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1665,7 +1665,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1692,7 +1692,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1715,7 +1715,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1738,7 +1738,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1761,7 +1761,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1787,7 +1787,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1825,7 +1825,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1894,7 +1894,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1918,7 +1918,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1945,7 +1945,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -1961,7 +1961,7 @@
    "lean_name": "NPCC.main_np_hardness",
    "file": "NPCC/Wrapper.lean",
    "statement_tex": "\\begin{theorem}[NP-completeness of communication complexity]\n    \\label{thm:main-nphard-intro}\n    Given the truth table of a Boolean function\n    $f:\\{0,1\\}^n\\times\\{0,1\\}^n\\to\\{0,1\\}$ and an integer $k$ in binary,\n    deciding whether $\\comp{f}\\le k$ is \\textsf{NP}-complete.\n\\end{theorem}",
-   "spec": "Layer-B WRAPPER: packaged reduction function + gap + explicit size bounds. In-kernel NP-completeness is out of scope -- the NP upper bound and polynomial runtime remain prose. The theorem composes the proved NPCC.vbp_np_hard package with reduction_gap and output_size_bounds. The only project citation axiom in the kernel footprint is AGHP.",
+   "spec": "Layer-B WRAPPER: packaged reduction function + gap + explicit size bounds. In-kernel NP-completeness is out of scope -- the NP upper bound and polynomial runtime remain prose. The theorem composes the proved NPCC.vbp_np_hard package with reduction_gap and output_size_bounds. The only project citation axiom in the kernel footprint is NPCC.finite_alphabet_balanced_family_exists.",
    "status": "proved",
    "attempts": [],
    "signed_off": true,
@@ -1969,7 +1969,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2001,7 +2001,7 @@
    "id": "aux:vbp-wrapper-support",
    "kind": "aux",
    "title": "VBP wrapper support lemmas (promise/YES preservation through preprocess+normalize; unpromised screen)",
-   "file": "Npcc/VBP.lean",
+   "file": "NPCC/VBP.lean",
    "status": "proved",
    "depends_on": [],
    "notes": "Added 2026-07-06 per two-lane vbp_np_hard formulation audit (ultra-npcc-12 + codex-axiom-audit): preprocess_promise, normalizeInstance promise + IsYes-iff (+ consumer-ready feasible/bad-bin transports as needed), not_isYes_of_not_promise. These are theorems (no axiom content) used by the later proved vbp_np_hard package; no VBP citation-axiom declaration remains.",
@@ -2030,7 +2030,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2049,7 +2049,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2068,7 +2068,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2087,7 +2087,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2106,7 +2106,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2161,7 +2161,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2180,7 +2180,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2234,7 +2234,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2253,7 +2253,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2290,7 +2290,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2309,7 +2309,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2416,7 +2416,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2452,7 +2452,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2471,7 +2471,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2490,7 +2490,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2509,7 +2509,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2528,7 +2528,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2547,7 +2547,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2566,7 +2566,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2585,7 +2585,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2604,7 +2604,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2623,7 +2623,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2642,7 +2642,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2661,7 +2661,7 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   },
@@ -2680,7 +2680,30 @@
    "axioms": [
     "propext",
     "Classical.choice",
-    "NPCC.aghp_balanced_family_exists",
+    "NPCC.finite_alphabet_balanced_family_exists",
+    "Quot.sound"
+   ]
+  },
+  {
+   "id": "thm:fixed-degree-size",
+   "kind": "lemma",
+   "title": "Fixed-degree output bound in graph source size",
+   "file": "NPCC/Wrapper.lean",
+   "lean_name": "NPCC.main_output_size_fixed_degree",
+   "status": "proved",
+   "depends_on": [
+    "lem:polytime",
+    "aux:ctor-full",
+    "axiom:vbp-np-hard"
+   ],
+   "attempts": [],
+   "notes": "2026-07-11: closes the previously prose-only fixed-degree step. The key kernel lemma proves a(d)*t2(d) <= 24*log_2(d), turning (q1+2)^(C*t2) into d^(24C); both final carriers are then bounded by one explicit polynomial in FourColorInstance.sourceSize.",
+   "route": null,
+   "signed_off": true,
+   "axioms": [
+    "propext",
+    "Classical.choice",
+    "NPCC.finite_alphabet_balanced_family_exists",
     "Quot.sound"
    ]
   }
@@ -2761,7 +2784,7 @@
   {
    "ts": "2026-07-06T00:00:00Z",
    "event": "tranche-6-staged",
-   "note": "Reduction layer staged (paper Sec 5 + App C): VBP source encoding + zero-anchor preprocessing, scaffold M0-M4 with audited parameters, AGHP family instantiation, upper-bound toolkit (first UPPER-bound lemmas incl. lem:transposeComp), large-d bundle (d_star; hard-seed threshold absorbed), Stage-1 threshold package, Stage-1/2 certification (M2Separation + dense-rows corollary BLOCKED on thm:SeparationTheorem), Stage-3 separation, Stage-4 local gadgets, MThreeFuzzyLeaves, MFourNoWasteLift (keystone; D5 protocol-surgery statement Fable-critical), size bounds (size-first), scaffold completeness, reduction gap. Historical staging note: at this point the wrapper was still blocked on vbp_np_hard governance + D7; that endpoint has since been discharged as a proved package, not a live citation axiom. Design decisions D1-D8 in scratchpad t6-map.md.",
+   "note": "Reduction layer staged (paper Sec 5 + App C): VBP source encoding + zero-anchor preprocessing, scaffold M0-M4 with audited parameters, the then-labeled AGHP balanced-family instantiation (now recorded as the AGHP/Bshouty citation interface), upper-bound toolkit (first UPPER-bound lemmas incl. lem:transposeComp), large-d bundle (d_star; hard-seed threshold absorbed), Stage-1 threshold package, Stage-1/2 certification (M2Separation + dense-rows corollary BLOCKED on thm:SeparationTheorem), Stage-3 separation, Stage-4 local gadgets, MThreeFuzzyLeaves, MFourNoWasteLift (keystone; D5 protocol-surgery statement Fable-critical), size bounds (size-first), scaffold completeness, reduction gap. Historical staging note: at this point the wrapper was still blocked on vbp_np_hard governance + D7; that endpoint has since been discharged as a proved package, not a live citation axiom. Design decisions D1-D8 in scratchpad t6-map.md.",
    "added": [
     "def:vbp-instance",
     "lem:zero-anchor-preprocessing",

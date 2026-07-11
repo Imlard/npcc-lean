@@ -4,7 +4,8 @@
 `m = 4` bins. The package is now a proved Lean definition, no longer a citation
 axiom: it uses `toVBP`, proves the promise, proves YES preservation, and proves
 the stated item, dimension, and matrix-size bounds. The cited NP-hardness and
-polynomial-time constructibility of 4-Colouring remain Layer-B prose, unchanged.
+polynomial-time constructibility of the map and the known hardness of
+4-Colouring remain external.
 -/
 def vbp_np_hard : VBP4PromiseHardnessPackage := {
   toVBP := toVBP

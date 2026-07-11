@@ -6,8 +6,8 @@ artifact's real target `(m:ℝ)·x`, columns an exact-size subset of
 `range (n^p)` (both column conditions are pure counts, and
 `card (Fin p → Y) = n^p`) — and hence, for every `BoolMat` of matching
 dimensions, an actual member of `Workspace.Types.Bracket.bracket M p x y`.
-This makes the artifact's verified bracket machinery available behind the
-typed definitions; game-level value correspondence is Target A′. -/
+This makes the reused bracket machinery available behind the typed definitions;
+`NPCC.Twin` proves the corresponding equality of communication values. -/
 theorem bridge_bracket {X Y : Type*} [Fintype X] [Fintype Y] {p : ℕ} {x y : ℝ}
     (RC : Finset (Fin p × X) × Finset (Fin p → Y))
     (h : RC ∈ bracketGE X Y p x y) :

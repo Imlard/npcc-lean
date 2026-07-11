@@ -1,4 +1,4 @@
-name: Lean proof check
+name: Lean proof and artifact integrity
 
 on:
   push:
@@ -8,27 +8,29 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: lake build NPCC
-    runs-on: windows-latest
+  verify:
+    name: Lean 4.30 (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build Lean formalization
+      - name: Build formalization, reuse layer, and isolated tests
         uses: leanprover/lean-action@v1
         with:
           lake-package-directory: lean
           auto-config: false
           build: true
-          build-args: NPCC
+          build-args: NPCC Workspace Tests
           test: false
           lint: false
           use-mathlib-cache: true
+          leanchecker: true
 
-      - name: Print axiom footprint
+      - name: Verify claims, axioms, source coverage, and explorer sync
         working-directory: lean
-        shell: pwsh
-        run: |
-          $lake = Join-Path $env:USERPROFILE ".elan\bin\lake.exe"
-          & $lake env lean AxiomReport.lean
-          & $lake env lean wrapper_check.lean
+        run: node pipeline/verify.mjs --lean

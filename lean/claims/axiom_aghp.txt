@@ -1,19 +1,19 @@
 -- CLAIM-BEGIN axiom:aghp
-/-- CITATION AXIOM [Alon–Goldreich–Håstad–Peralta 1992, "Simple constructions
-of almost k-wise independent random variables"; cited by the paper as
-`rem:balanced-columns-exist`]: for all `q ≥ t ≥ 1`, every nonempty finite
-alphabet `Y`, and every accuracy `ε ∈ (0,1)`, there is an indexed family of
-`q`-tuples over `Y` (repeats allowed and counted — the family is a function
-from `Fin L`, not a set) that is `(q,t)`-balanced with accuracy `ε`: for
-every coordinate set `J` of size at most `t` and every pattern, the fraction
-of family members matching the pattern on `J` deviates from `|Y|^{-|J|}` by
-at most `ε · |Y|^{-|J|}`. The family size `L` is bounded by an explicit
-polynomial with a single absolute constant `C`, majorizing the paper's
-`poly(q) · |Y|^{O(t)} · ε^{-O(1)}`. The paper's deterministic poly-TIME
-constructibility claim is deliberately NOT part of this axiom (it belongs to
-the Layer-B complexity wrapper). Y lives in `Type` (universe 0) — the weakest
-form the development needs. -/
-axiom aghp_balanced_family_exists :
+/-- CITATION INTERFACE for the finite-alphabet balanced-family corollary used
+by the paper's `rem:balanced-columns-exist`.
+
+This is the exact existence-and-size statement consumed by the Lean proof:
+for every nonempty finite alphabet `Y`, it supplies an indexed family of
+`q`-tuples (repetitions are counted) with relative pointwise error at most
+`epsilon` on every projection of size at most `t`. One absolute constant also
+bounds the family size by the displayed expression.
+
+Source chain: AGHP supplies the historical binary almost-independence
+construction; Bshouty's generic sampler and arbitrary-alphabet extension give
+this exact corollary. The Lean development treats that external construction
+theorem as an assumption. Deterministic polynomial-time generation is not part
+of this proposition, so this axiom is not itself an executable generator. -/
+axiom finite_alphabet_balanced_family_exists :
     ∃ C : ℕ, 0 < C ∧
       ∀ (q t : ℕ) (Y : Type) [Fintype Y] [DecidableEq Y] (ε : ℝ),
         1 ≤ t → t ≤ q → 0 < ε → ε < 1 → 1 ≤ Fintype.card Y →

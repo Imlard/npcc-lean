@@ -1,10 +1,9 @@
 -- CLAIM-BEGIN lem:classical-separation-clean
-/-- Paper `lem:classical-separation-clean` (`NPCC.classical_separation`), in the
-rectangle-threaded rendering adjudicated by the bake-off
-(`bakeoff-protocol-layer-2026-07-06.md`): a syntactic "row-only above depth `Q`"
+/-- Paper `lem:classical-separation-clean` (`NPCC.classical_separation`), in a
+rectangle-threaded rendering: a syntactic "row-only above depth `Q`"
 conclusion is UNPROVABLE (unreachable dead subtrees may hold Bob nodes / early
-leaves without changing `eval` or `cost`), so conclusion (a) is Pro's
-surviving-branch `FirstKRowBitsOn` — Bob nodes / leaves forbidden only on
+leaves without changing `eval` or `cost`), so conclusion (a) is the
+surviving-branch predicate `FirstKRowBitsOn`: Bob nodes / leaves are forbidden only on
 nonempty rectangles. `q = 2^Q` is rendered literally (no `Real.logb`
 bit-count); the label lands in `Fin (2^Q)` directly via `prefixLabelFinQ`
 (junk rows → block `0`, harmless since every no-waste count filters through

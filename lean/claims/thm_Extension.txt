@@ -5,8 +5,9 @@
 `2^T ≤ 2·p_seed` (exact integer form, correct at `T = 0`). The relaxed
 interlace `Ŝ = ⟨M⟩_{q,S}` is `relaxedInterlace f S` for an ARBITRARY
 `(q,t)`-balanced family `S : Fin L → Fin q → Y` with accuracy `ε`
-(the paper's specific AGHP family `S_{q,t}(Cols M)` instantiates this —
-safe-stronger generalization; `|Cols Ŝ| = L`, family-index columns per
+(the paper's selected family `S_{q,t}(Cols M)` is one instance; its exact
+AGHP/Bshouty citation boundary is documented separately;
+`|Cols Ŝ| = L`, family-index columns per
 `def:relaxed-interlace`). Submatrix condition (i) is GE-equipartition at
 threshold `⌈r·x_seed·m⌉` over an EXACT-size block set `|Q| = r·p_seed`;
 (ii) is `h·L ≤ |C'|`. Conclusion: `comp N ≥ comp M + log q` with

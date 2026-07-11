@@ -1,0 +1,13 @@
+-- CLAIM-BEGIN thm:fixed-degree-size
+/-- Fixed-degree output-size theorem for the complete typed reduction.  The
+degree `fixedStructuralDegree` and all coefficients are absolute constants,
+independent of `G`.  Both Alice's and Bob's carrier cardinalities are bounded
+by the same explicit polynomial in `G.sourceSize`. -/
+theorem main_output_size_fixed_degree (G : FourColorInstance) :
+    Fintype.card
+        (R4 (ctorScaleFull (vbp_np_hard.toVBP G))
+          (reducedInstanceFull (vbp_np_hard.toVBP G)).n)
+      <= sourceCarrierPolynomial G.sourceSize /\
+    Fintype.card (C4 (ctorScaleFull (vbp_np_hard.toVBP G)))
+      <= sourceCarrierPolynomial G.sourceSize
+-- CLAIM-END thm:fixed-degree-size

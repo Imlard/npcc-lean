@@ -1,11 +1,14 @@
 -- CLAIM-BEGIN thm:main-nphard-intro
 /-- Paper `thm:main-nphard-intro` (NP-completeness of deterministic communication
-complexity), Layer-B kernel content: a size-bounded many-one gap reduction from
-edge-list 4-Colouring to the communication matrix `M₄`. For every 4-colouring
-instance `G`, the produced VBP instance is promised, its item/dimension counts and
-the `M₄` truth-table carrier are polynomially bounded in `G.sourceSize`, and `G`
-is 4-colourable IFF `M₄` has a deterministic protocol of cost `≤ B_yes`. Poly-time
-constructibility and NP membership remain Layer-B prose. -/
+complexity), exact kernel content: a choice-based communication-gap construction
+from loopless edge-list 4-Colouring to the typed matrix `M₄`. For every instance
+`G`, Lean proves the VBP promise, elementary source-size bounds, an explicit scale
+bound, explicit row/column carrier bounds, and
+`G.IsYes ↔ D(M₄) ≤ B_yes`. Fixed-degree domination is proved by
+`main_output_size_fixed_degree`; the final square power-of-two padding, exact
+preservation of `D`, and polynomial truth-table bit count are proved in
+`NPCC.Public`. It does not prove a serialized source encoding, an executable
+balanced-family generator or runtime, NP membership, or source NP-hardness. -/
 theorem main_np_hardness :
     ∀ G : FourColorInstance,
       (vbp_np_hard.toVBP G).Promise ∧

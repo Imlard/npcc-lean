@@ -1,0 +1,14 @@
+*.cff text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.lean text eol=lf
+*.md text eol=lf
+*.mjs text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.pdf binary
+*.png binary
+*.zip binary

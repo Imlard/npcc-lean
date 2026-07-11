@@ -1,17 +1,16 @@
 -- CLAIM-BEGIN def:S-family
 /-- Paper `rem:balanced-columns-exist`: the accuracy at which every scaffold
-family is drawn, `ε_{q,t} := (2qt)^{−c}`. The absolute exponent is pinned to
-the AGHP axiom's own constant `c := aghpConstant` (RATIFICATION FLAG: the
-paper only demands "a sufficiently large absolute constant"; if the Stage-1
-threshold package later needs a larger exponent, this def is the single
-point of change). -/
+family is drawn, `ε_{q,t} := (2qt)^{−c}`. The exponent is the constant
+`c := balancedFamilyConstant` supplied by the balanced-family citation
+interface. All downstream
+large-parameter gates use this same choice. -/
 noncomputable def epsQT (q t : ℕ) : ℝ :=
-  ((2 * q * t : ℕ) : ℝ) ^ (-(aghpConstant : ℤ))
+  ((2 * q * t : ℕ) : ℝ) ^ (-(balancedFamilyConstant : ℤ))
 
-/-- The scaffold's balanced-family selector `S_{q,t}(Y)`: the AGHP family
-over alphabet `Y` at accuracy `ε_{q,t}`, chosen ONCE (choice inside
-`balancedFamilyData`); downstream stage isomorphisms must TRANSPORT it and
-never re-choose (GameIso ruling). -/
+/-- The scaffold's balanced-family selector `S_{q,t}(Y)`: the cited family
+over alphabet `Y` at accuracy `ε_{q,t}`, selected once inside
+`balancedFamilyData`. Downstream stage isomorphisms transport this same family
+rather than selecting a new one. -/
 noncomputable def scaffoldFamily (q t : ℕ) (Y : Type) [Fintype Y]
     [DecidableEq Y] : (L : ℕ) × (Fin L → Fin q → Y) :=
   balancedFamilyData q t Y (epsQT q t)

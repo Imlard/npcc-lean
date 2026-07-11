@@ -1,12 +1,11 @@
 name = "npcc"
 version = "0.1.0"
 keywords = ["math"]
-defaultTargets = ["Npcc"]
+defaultTargets = ["NPCC", "Workspace", "Tests"]
 
 [leanOptions]
 pp.unicode.fun = true # pretty-prints `fun a ↦ b`
 relaxedAutoImplicit = false
-weak.linter.mathlibStandardSet = true
 maxSynthPendingDepth = 3
 
 [[require]]
@@ -15,10 +14,10 @@ scope = "leanprover-community"
 rev = "v4.30.0"
 
 [[lean_lib]]
-name = "Npcc"
-
-[[lean_lib]]
 name = "Workspace"
 
 [[lean_lib]]
 name = "NPCC"
+
+[[lean_lib]]
+name = "Tests"

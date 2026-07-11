@@ -5,7 +5,10 @@ two-copy interlace to bounds at row density `2x` and densities
 `y², y²/2, y²/4` (levels `H+1, H, H−1`). The paper's `M` is any Boolean
 matrix — here any typed game `f` over Fintypes; `comp⟨M,k,·,·⟩` is
 `Dfamily (interlaceFun f k) (bracketGE X Y k · ·)`; comparisons are ℝ-cast
-since `H ∈ ℝ` (the paper's convention). GUARD hH added per verified Ultra finding (see pipeline/judgments/ultra-npcc-1.md): the paper text lacks it and is false at H = 1 (witness: the seed [0 1]); all paper use sites satisfy it. Hypothesis order otherwise matches the paper:
+since `H ∈ ℝ` (the paper's convention). The guard `1 < H` is added because
+the printed statement is false at `H = 1`; `PAPER-FINDINGS.md` gives an
+explicit two-column counterexample. All downstream use sites satisfy the
+guard. Hypothesis order otherwise matches the paper:
 `0 < x ≤ 1/2`, `0 < y ≤ 1`. -/
 theorem two_copy_ladder {X Y : Type*} [Fintype X] [Fintype Y]
     (f : X → Y → Bool) {x y H : ℝ}

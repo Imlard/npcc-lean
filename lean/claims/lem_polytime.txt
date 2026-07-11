@@ -1,21 +1,20 @@
 -- CLAIM-BEGIN lem:polytime
-/-- Paper `lem:polytime`, SIZE-BOUNDS-FIRST kernel half (D2/D7). NAMING FLAG:
-the Lean identifier is `output_size_bounds`, NOT `polytime` — the ruling
-forbids a kernel lemma named as if it certified machine-constructibility
-(trap #41); this theorem proves only cardinality bounds. No Turing machines,
-no O-notation.
+/-- Paper `lem:polytime`, restricted to the carrier-count statement actually
+proved in Lean. The identifier is `output_size_bounds` because this theorem
+does not itself certify machine constructibility or a running-time bound;
+`NPCC.PolynomialSize.output_size_fixed_degree` supplies the separate
+fixed-degree corollary.
 
 For every source vector count `n` and ambient dimension `d`, under the
 large-`d` balancedness gates (`t₁ ≤ q₁+5`, `t₂ ≤ q₂`, `1 ≤ q₁` — all supplied
 on the normalised `d ≥ d_star` regime), the reduction's output matrix `M₄`
-has row and column carriers bounded by EXPLICIT MONOMIALS in `n` and `d`:
-* rows:    `|R₄| ≤ n + rowPoly d`   (linear in `n`, monomial in `d`);
-* columns: `|C₄| ≤ colPoly d`       (monomial in `d`, independent of `n`).
-Both `rowPoly` and `colPoly` are the closed-form monomials defined above,
-whose only transcendental ingredient is the single absolute AGHP constant
-`C = aghpConstant` in the exponents; `q₁,q₂,t₁,t₂` are exact ℕ functions of
-`Nat.log 2 d`. This is the explicit `poly(n+d)` output-size certificate the
-Layer-B NP-hardness wrapper consumes. -/
+has row and column carriers bounded by explicit expressions:
+* rows:    `|R₄| ≤ n + rowPoly d`;
+* columns: `|C₄| ≤ colPoly d`.
+`rowPoly` and `colPoly` are the closed forms defined above from the cited
+family-size bound and the exact parameters `q₁,q₂,t₁,t₂`. Their fixed-degree
+domination in the reduction's combinatorial source size is proved in
+`NPCC.PolynomialSize`; serialized encodings and runtime remain separate. -/
 theorem output_size_bounds (d n : ℕ)
     (ht1 : 1 ≤ Params.t1 d) (ht1q : Params.t1 d ≤ Params.q1 d + 5)
     (ht2 : 1 ≤ Params.t2 d) (ht2q : Params.t2 d ≤ Params.q2 d)
@@ -30,10 +29,10 @@ theorem output_size_bounds (d n : ℕ)
       push_cast; ring
     rw [hcast]
     have : 4 * (L2 d : ℝ)
-        ≤ 4 * (((Params.q2 d + 2 : ℕ) : ℝ) ^ aghpConstant
-              * ((Params.q1 d + 2 : ℕ) : ℝ) ^ (aghpConstant * Params.t2 d)
-              * (((2 * Params.q2 d * Params.t2 d) ^ aghpConstant : ℕ) : ℝ)
-                  ^ aghpConstant) := by
+        ≤ 4 * (((Params.q2 d + 2 : ℕ) : ℝ) ^ balancedFamilyConstant
+              * ((Params.q1 d + 2 : ℕ) : ℝ) ^ (balancedFamilyConstant * Params.t2 d)
+              * (((2 * Params.q2 d * Params.t2 d) ^ balancedFamilyConstant : ℕ) : ℝ)
+                  ^ balancedFamilyConstant) := by
       gcongr
     linarith
   · -- columns: |C₄| = 32·(q₂·L₁)⁴ ≤ 32·(q₂·(L₁ monomial))⁴ = colPoly d.

@@ -1,25 +1,35 @@
-# Reuse verification status (npc-cc workspace)
+# Reused Workspace layer
 
-Declaration inventory (295 decls / 34 files, per-file table): see
-[reference-lean/REUSE-INVENTORY.md](reference-lean/REUSE-INVENTORY.md).
+`Workspace.lean` imports all 33 production modules under `Workspace/`. The
+former unimported `Workspace/DigitTest.lean` has been moved to the isolated
+`Tests` library and renamed so it no longer collides with production
+declarations.
 
-## Re-verification status (2026-07-06)
+## Re-verification
 
-Workspace `C:\lean\npc-cc` (git-mirrored to `formalization/lean-mirror.git`), pinned to
-**Lean 4.30.0 + mathlib v4.30.0 release**.
+The production layer is built by:
 
-CAUGHT during verification: the published artifact's root module `Workspace.lean` imports
-ONLY `Workspace.Basic` (23 bytes), so the first "successful" `lake build Workspace`
-compiled just the sanity file — a false verification, exposed when `#print axioms` failed
-to find the main theorems. Root module regenerated to import all 33 modules; the full
-rebuild + `#print axioms` on the four main theorems is the actual verdict:
+```sh
+lake build Workspace
+lake env lean AxiomReport.lean
+```
 
-**VERDICT (2026-07-06): VERIFIED.** Full tree (all 33 modules) builds clean under
-Lean 4.30.0 + mathlib v4.30.0 — `Build completed successfully (8,509 jobs)`, zero compile
-errors (remaining log noise = style-linter `info` lines). `#print axioms` on the four main
-theorems (namespace `Workspace.MainTheorem`: `refutation_of_direct_sum_conjecture`,
-`multiplicative_consequence`, `complexity_invariant_to_transposition`,
-`subgames_are_easier`) → exactly `[propext, Classical.choice, Quot.sound]` each.
-The imported-toolkit layer for the NP-hardness formalization is certified reusable under
-our pin, independently of the authors' original toolchain. Logs: `build-workspace.log`,
-`axiom-report.log` in the workspace (mirrored).
+Under Lean 4.30.0 and Mathlib v4.30.0, the four reported Workspace headline
+theorems depend only on:
+
+```text
+propext
+Classical.choice
+Quot.sound
+```
+
+They do not depend on the project balanced-family citation axiom.
+
+## Provenance qualification
+
+The repository contains the complete source snapshot used by this proof, so it
+is kernel-auditable and reproducible. It does not currently contain a verifiable
+upstream repository URL plus commit hash, license, or a mechanically checked
+proof that this snapshot is byte-identical to an upstream Mackenzie-Saffidine
+release. Add those items before describing the layer as an unchanged upstream
+artifact.

@@ -46,11 +46,17 @@ function claimPath(id) { return path.join(CLAIMS, id.replace(/[:/]/g, "_") + ".t
 // ---------- claim blocks ----------
 const BEGIN = id => `-- CLAIM-BEGIN ${id}`;
 const END = id => `-- CLAIM-END ${id}`;
+function canonicalClaim(text) {
+  return text.replace(/\r\n/g, "\n").replace(/\n$/, "");
+}
 function extractClaim(text, id) {
-  const b = text.indexOf(BEGIN(id));
-  const e = text.indexOf(END(id));
-  if (b === -1 || e === -1 || e <= b) return null;
-  return text.slice(b, e + END(id).length);
+  const begin = BEGIN(id);
+  const end = END(id);
+  const escape = value => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const starts = [...text.matchAll(new RegExp(`^${escape(begin)}\\r?$`, "gm"))];
+  const ends = [...text.matchAll(new RegExp(`^${escape(end)}\\r?$`, "gm"))];
+  if (starts.length !== 1 || ends.length !== 1 || ends[0].index <= starts[0].index) return null;
+  return text.slice(starts[0].index, ends[0].index + end.length);
 }
 // Any write to a file must preserve, byte-identically, EVERY already-registered claim
 // living in that file (not just the obligation being worked on).
@@ -59,7 +65,8 @@ function verifyRegisteredClaims(L, file, text, exceptId) {
     if (o.file !== file || o.id === exceptId) continue;
     const reg = claimPath(o.id);
     if (!fs.existsSync(reg)) continue;
-    if (extractClaim(text, o.id) !== fs.readFileSync(reg, "utf8")) return o.id;
+    if (canonicalClaim(extractClaim(text, o.id) || "") !==
+        canonicalClaim(fs.readFileSync(reg, "utf8"))) return o.id;
   }
   return null;
 }
@@ -166,9 +173,12 @@ if (cmd === "status") {
   for (const o of L.obligations) counts[o.status] = (counts[o.status] || 0) + 1;
   const attempts = L.obligations.reduce((s, o) => s + o.attempts.length, 0);
   const closed = L.obligations.filter(o => CLOSED.has(o.status)).length;
+  const completion = L.obligations.length
+    ? (closed / L.obligations.length * 100).toFixed(0) + "%"
+    : "n/a";
   console.log(`target=${L.target} frozen=${L.dag_frozen} obligations=${L.obligations.length}`);
   console.log("counts:", JSON.stringify(counts));
-  console.log(`attempts total=${attempts}  closed=${closed}  close-rate=${attempts ? (closed / attempts * 100).toFixed(0) + "%" : "n/a"} (K1 trips at <20% over >=50 attempts)`);
+  console.log(`proof attempts=${attempts}  obligations closed=${closed}/${L.obligations.length}  completion=${completion}`);
   for (const o of L.obligations)
     console.log(` ${o.status.padEnd(7)} ${String(o.attempts.length).padStart(2)}att ${o.signed_off ? "S" : (needsSignoff(o) ? "-" : "·")} ${o.id}${o.route ? "  [" + o.route + "]" : ""}`);
 } else if (cmd === "next") {
@@ -217,7 +227,7 @@ if (cmd === "status") {
   const text = fs.readFileSync(arg2, "utf8");
   const claim = extractClaim(text, o.id);
   const registered = fs.readFileSync(claimPath(o.id), "utf8");
-  if (claim !== registered) { // C3 gate (a): Claim Check, byte identity
+  if (canonicalClaim(claim) !== canonicalClaim(registered)) { // C3 gate (a): Claim Check
     route(L, o, "CLAIM-CHECK FAILED: statement block differs from registered claim");
     saveLedger(L);
     die("Claim Check failed: statement block was modified. Rejected.");

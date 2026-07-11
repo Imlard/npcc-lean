@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: >-
+  Please cite the accompanying paper and identify the tagged artifact version
+  used for verification.
+title: Lean formalization of the deterministic communication-complexity gap construction
+type: software
+authors:
+  - family-names: Gaspers
+    given-names: Serge
+  - family-names: He
+    given-names: Tao Zixu
+  - family-names: Mackenzie
+    given-names: Simon
+repository-code: https://github.com/SimonWMackenzie/npcc-lean
+url: https://simonwmackenzie.github.io/npcc-lean/
+preferred-citation:
+  type: article
+  title: NP-Completeness of Deterministic Communication Complexity via Relaxed Interlacing
+  authors:
+    - family-names: Gaspers
+      given-names: Serge
+    - family-names: He
+      given-names: Tao Zixu
+    - family-names: Mackenzie
+      given-names: Simon
+  year: 2025
+  url: https://arxiv.org/abs/2508.05597

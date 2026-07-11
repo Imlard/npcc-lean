@@ -15,9 +15,9 @@ zero anchors `z_1 = ⋯ = z_4 = 0^{5d}`), rendered here as the companion
    at `β` (the `ℓ ≥ 2` and neutral-slot presence at the SAME coordinate the
    final NoWasteLift contradiction consumes).
 
-(The paper's "computable in polynomial time" is the Layer-B size/complexity
-claim about `preprocess`; per the D2/D7 design rulings the kernel target is the
-combinatorial content above, not an in-kernel polytime sentence.) -/
+(The paper also says this preprocessing is computable in polynomial time. The
+Lean theorem records the combinatorial specification above, not a machine or
+running-time statement.) -/
 theorem zero_anchor_preprocessing (I : VBPInstance) :
     (I.IsYes ↔ (preprocess I).IsYes) ∧
     (((preprocess I).IsYes) →

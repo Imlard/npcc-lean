@@ -406,11 +406,11 @@ column index `j` to the column vector `fun i => M.e i j` is injective. -/
 def DistinctColumns (M : BoolMat) : Prop :=
   Function.Injective (fun (j : Fin M.n) => (fun i : Fin M.m => M.e i j))
 
-/-- **EXTERNAL (prior work) — the log-rank lower bound, in its standard
-distinct-columns / fooling form.**
+/-- **Log-rank lower bound in the distinct-columns / fooling form.**
 
-This is the only non-`Mathlib` axiom used in this development.  It packages two
-classical facts about deterministic two-party communication complexity:
+This theorem packages two classical facts about deterministic two-party
+communication complexity, both proved in the imported `Workspace.LogRankBound`
+module:
 
 * the **log-rank lower bound** (Kushilevitz–Nisan, *Communication Complexity*,
   cited in the paper as `Kushilevitz1997`, and Rao–Yehudayoff,
@@ -429,8 +429,9 @@ matrix `M` with pairwise distinct columns,
 
 The inner `log₂ M.n` is exactly the column-count whose `log₂` lower-bounds the
 real rank (Step 2 of the paper's argument); the outer `log₂` is the log-rank
-bound itself (Step 3).  This statement is **not** proved in the paper — it is the
-cited external ingredient — and is admitted here as a named axiom. -/
+bound itself (Step 3). The paper cites these classical ingredients, while this
+artifact proves the combined Lean theorem from the reusable rank library; it is
+not a project axiom. -/
 theorem logRank_distinctCols (M : BoolMat) (hM : DistinctColumns M) :
     (Dmat M : ℝ) ≥ Real.logb 2 (Real.logb 2 (M.n : ℝ)) := by
   by_cases hMn : M.n ≤ 1

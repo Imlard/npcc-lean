@@ -2,7 +2,7 @@
 /-- Paper `cor:robust-two-copy-ladder`, WITH the F1 repair: the paper states
 this for `(δ,b)`-robust `M` with `b ≥ 1` only, instantiating the two-copy
 ladder at `H = comp M` — but R1 supplies only `comp M ≥ 1`, and the ladder is
-FALSE at `H = 1` (machine-verified countermodel, see PAPER-FINDINGS.md F1).
+false at `H = 1` (see the explicit counterexample in `PAPER-FINDINGS.md` F1).
 The hypothesis `2 ≤ D f` (equivalently the ladder's guard `1 < H`) is
 therefore added; every downstream use in the paper satisfies it. Densities:
 row `2^(1-b)` (= `2·2^{-b}`), columns `y₀²/4, y₀²/2, y₀²` for

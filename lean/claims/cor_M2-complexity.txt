@@ -1,8 +1,8 @@
 -- CLAIM-BEGIN cor:M2-complexity
 /-- Paper `cor:M2-complexity`: the exact Stage-2 complexity.  The lower bound
 is assembled through `localized_extension` from `M2_hard_seed` and the
-column-loss corollary above.  The explicit residual gates are the numeric
-App-C comparisons not yet bundled in `Checklist`. -/
+column-loss corollary above. The explicit residual gates are the numerical
+Appendix-C comparisons required at this use site. -/
 theorem M2_complexity (d : ℕ) (hpow : IsPow2 d)
     (hlog256 : 256 ≤ Nat.log 2 d)
     (hlarge : Checklist d)

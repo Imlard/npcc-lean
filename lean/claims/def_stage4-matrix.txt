@@ -10,10 +10,10 @@ def activeSet {n q : ℕ} (v : Fin n → Fin q → Bool) (α : Fin q) :
     Finset (Fin n) :=
   Finset.univ.filter (fun i => v i α = true)
 
-/-- The injection `π_α : A_α ↪ [4]` (D4 design, ratified: the
-order-preserving enumeration): the rank of `i` inside `A_α`, i.e. the number
-of strictly smaller active rows. TOTAL — defined for every row, active or
-not (D1 total-fallback pattern); on `A_α` it is strictly increasing
+/-- The injection `π_α : A_α ↪ [4]`, represented by the order-preserving
+rank of `i` inside `A_α`, i.e. the number of strictly smaller active rows.
+It is total, with a harmless fallback value outside `A_α`; on `A_α` it is
+strictly increasing
 (`piAlpha_lt_of_lt`), hence injective (`piAlpha_injOn`), and under the
 source-side screen `|A_α| ≤ 4` it lands in `[4]` (`piAlpha_lt_four`). -/
 def piAlpha {n q : ℕ} (v : Fin n → Fin q → Bool) (α : Fin q) (i : Fin n) :
@@ -39,8 +39,8 @@ patterns — the two encodings must stay aligned (`localGadget_tail`). -/
 def localGadget (s : Fin 5) (k : Fin (2 ^ 5)) : Bool :=
   interlaceFun M0 5 (s, 0) (finFunctionFinEquiv.symm k)
 
-/-- The Stage-4 row carrier `R₄ = R₃ ⊕ [n]`: a TAGGED SUM (binding ruling —
-never an untagged union). `Sum.inl` carries the template rows `R₃ = [4]×C₂`,
+/-- The Stage-4 row carrier `R₄ = R₃ ⊕ [n]` is a tagged sum.
+`Sum.inl` carries the template rows `R₃ = [4]×C₂`,
 `Sum.inr` the vector rows `[n]` of the attached instance (including its four
 zero anchors). -/
 abbrev R4 (d n : ℕ) : Type := R3 d ⊕ Fin n

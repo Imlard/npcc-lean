@@ -3,7 +3,7 @@
   "propext",
   "Classical.choice",
   "Quot.sound",
-  "NPCC.aghp_balanced_family_exists"
+  "NPCC.finite_alphabet_balanced_family_exists"
  ],
  "policyAxiomsNote": "Additions require editing deployment-pack/01-boundary-certificate.md FIRST. The VBP endpoint formerly tracked as NPCC.vbp_np_hard is now a proved package in NPCC.Wrapper, not an allowed citation axiom.",
  "lanes": [

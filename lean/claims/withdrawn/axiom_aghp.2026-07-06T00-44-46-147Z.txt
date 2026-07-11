@@ -13,7 +13,7 @@ polynomial with a single absolute constant `C`, majorizing the paper's
 constructibility claim is deliberately NOT part of this axiom (it belongs to
 the Layer-B complexity wrapper). Y lives in `Type` (universe 0) — the weakest
 form the development needs. -/
-axiom aghp_balanced_family_exists :
+axiom finite_alphabet_balanced_family_exists :
     ∃ C : ℕ, 0 < C ∧
       ∀ (q t : ℕ) (Y : Type) [Fintype Y] [DecidableEq Y] (ε : ℝ),
         1 ≤ t → t ≤ q → 0 < ε → ε < 1 → 1 ≤ Fintype.card Y →
